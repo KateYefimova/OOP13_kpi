@@ -1,56 +1,48 @@
 #include "userInterface.h"
+#include "InputException.h"
 #include <iostream>
 #include <regex>
 
 UserInterface::UserInterface(Airport& airport, FileManager& file)
     : airport(airport), file(file) {}  
+
 void UserInterface::addFlightsFromUser() {
     std::string type, city, time, licenseDate;
 
-    while (true) {
-        std::cout << "Enter flight type (General/Charter): ";
-        std::cin >> type;
+    std::cout << "Enter flight type (General/Charter): ";
+    std::cin >> type;
 
-        if (type == "General" || type == "Charter") {
-            break;
-        }
-        else {
-            std::cout << "Invalid flight type, please enter 'General' or 'Charter'." << std::endl;
-        }
+    if (type != "General" && type != "Charter") {
+        throw InputException("Invalid flight type. Please enter 'General' or 'Charter'.");
     }
 
-    while (true) {
-        std::cout << "Enter destination city: ";
-        std::cin >> city;
+    std::cout << "Enter destination city: ";
+    std::cin >> city;
 
-        if (!city.empty()) {
-            break;
-        }
-        else {
-            std::cout << "City cannot be empty, please enter a valid city." << std::endl;
-        }
+    if (city.empty()) {
+        throw InputException("City cannot be empty. Please enter a valid city.");
     }
 
     std::cout << "Enter departure time (HH:MM): ";
     std::cin >> time;
+    if (!std::regex_match(time, std::regex("^([01]\\d|2[0-3]):([0-5]\\d)$"))) {
+        throw InputException("Invalid time format. Please enter time in HH:MM format.");
+    }
 
-    Flight* flight = nullptr; 
+    Flight* flight = nullptr;
 
     if (type == "General") {
-        flight = new GeneralFlight(city, time); 
+        flight = new GeneralFlight(city, time);
     }
     else if (type == "Charter") {
         while (true) {
             std::cout << "Enter license expiration date (YYYY-MM-DD): ";
             std::cin >> licenseDate;
 
-            if (std::regex_match(licenseDate, std::regex("\\d{4}-\\d{2}-\\d{2}"))) {
-                flight = new CharterFlight(city, time, licenseDate); 
-                break;
+            if (!std::regex_match(licenseDate, std::regex("\\d{4}-\\d{2}-\\d{2}"))) {
+                throw InputException("Invalid date format. Please enter date in YYYY-MM-DD format.");
             }
-            else {
-                std::cout << "Invalid date format. Please enter date in YYYY-MM-DD format." << std::endl;
-            }
+            flight = new CharterFlight(city, time, licenseDate);
         }
     }
 
@@ -66,6 +58,12 @@ void UserInterface::askCity() const {
 
     std::cout << "Enter city : ";
     std::getline(std::cin >> std::ws, city);
+    if (city.empty()) {
+        throw InputException("City name cannot be empty. Please enter a valid city.");
+    }
+    if (!std::regex_match(city, std::regex("^[a-zA-Z\\s]+$"))) {
+        throw InputException("Invalid city name. Only alphabetic characters and spaces are allowed.");
+    }
     unique_ptr<Flight> earliest = airport.getEarliestFlight(city);
     unique_ptr<Flight> latest =airport.getLatestFlight(city);
 

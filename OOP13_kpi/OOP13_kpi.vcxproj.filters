@@ -45,6 +45,12 @@
     <ClCompile Include="fileException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InputException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NullPointerException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="airport4.h">
@@ -72,6 +78,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="FileException.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputException.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NullPointerException.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,6 +7,7 @@
 #include "fileManager.h"
 #include "UserInterface.h"
 
+
 class Menu {
 private:
     FileManager fileManager;

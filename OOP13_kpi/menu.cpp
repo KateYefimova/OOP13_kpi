@@ -15,12 +15,12 @@ void Menu::mainMenu() {
         cin >> command;
         if (command == "1") {
             try {
-                if (fileManager.loadFlightsFromFile("flights.txt")) {
+                if (fileManager.loadFlightsFromFile("fli.txt")) {
                     user.askCity();
                 }
             }
-            catch (const FileException& e){
-                std::cerr << "Error loading file: " << e.what() << std::endl;
+            catch (const MyBaseException& e){
+                std::cerr << "Error: " << e.what() << std::endl;
             }
         
         }
@@ -30,8 +30,8 @@ void Menu::mainMenu() {
                     user.addFlightsFromUser();
                 }
             }
-            catch (const FileException& e) {
-                std::cerr << "Error loading file: " << e.what() << std::endl;
+            catch (const MyBaseException& e) {
+                std::cerr << "Error: " << e.what() << std::endl;
             }
         }
         else if (command == "3") {

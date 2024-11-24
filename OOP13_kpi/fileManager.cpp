@@ -6,7 +6,7 @@
 bool FileManager::loadFlightsFromFile( const string& filename) {
     ifstream file(filename);
     if (!file) {
-        throw FileException();
+        throw FileException("Unable to open file: " + filename);
     }
 
     string line, city, time, type, licenseDate;
@@ -31,12 +31,9 @@ bool FileManager::loadFlightsFromFile( const string& filename) {
 void FileManager::saveFlightsToFile(const Flight& flight, const std::string& filename) {
     std::ofstream outfile(filename, std::ios::app); 
     if (!outfile.is_open()) {
-        std::cout << "Error opening file for writing." << std::endl;
-        return;
+        throw FileException("Unable to open file: " + filename);
     }
-
-    flight.saveToFile(outfile);
+    flight.saveToFile(outfile); 
     outfile << std::endl;
-
-    outfile.close();
+    outfile.close(); 
 }

@@ -7,6 +7,7 @@
 #include "flight5.h"
 #include "generalFlight.h"
 #include "charterFlight.h"
+#include "NullPointerException.h"
 
 using namespace std;
 

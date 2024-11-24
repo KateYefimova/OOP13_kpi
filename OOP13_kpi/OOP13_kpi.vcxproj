@@ -134,7 +134,9 @@
     <ClCompile Include="fileManager.cpp" />
     <ClCompile Include="flight5.cpp" />
     <ClCompile Include="generalFlight.cpp" />
+    <ClCompile Include="InputException.cpp" />
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="NullPointerException.cpp" />
     <ClCompile Include="OOP13_kpi.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
@@ -146,7 +148,9 @@
     <ClInclude Include="fileManager.h" />
     <ClInclude Include="flight5.h" />
     <ClInclude Include="generalFlight.h" />
+    <ClInclude Include="InputException.h" />
     <ClInclude Include="menu.h" />
+    <ClInclude Include="NullPointerException.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>

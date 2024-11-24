@@ -24,6 +24,9 @@ unique_ptr<Flight> Airport::getEarliestFlight(const std::string& city) const {
             earliest = flight->clone();
         }
     }
+    if (!earliest) {
+        throw NullPointerException("The earliest flight isn`t found");
+    }
     return earliest;
 }
 
@@ -33,6 +36,9 @@ unique_ptr<Flight> Airport::getLatestFlight(const std::string& city) const {
         if (flight->getCity() == city && (!latest || flight->getTime() > latest->getTime())) {
             latest = flight->clone();
         }
+    }
+    if (!latest) {
+        throw NullPointerException("The latest flight isn`t found");
     }
     return latest;
 }
